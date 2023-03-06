@@ -22,30 +22,31 @@ function playRound(computerSelection, playerSelection){
         (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') ||
         (playerSelection === 'PAPER' && computerSelection === 'ROCK')
       ) {
-        winner = 'player'
+        winner = 'player';
+        playerScore++;
       }
       if (
         (computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
         (computerSelection === 'SCISSORS' && playerSelection === 'PAPER') ||
         (computerSelection === 'PAPER' && playerSelection === 'ROCK')
       ) {
-        winner = 'computer'
+        winner = 'computer';
+        computerScore++;
         }
-        return winner;
     }
 
 function game(){
  for(let i = 0; i < 5; i++){
-    playRound(computerSelection, "rock")
-    if (winner == 'player') {playerScore++}
-    else if (winner == 'Computer'){computerScore++}
+    computerSelection = getComputerChoice()
+    playerSelection = prompt("Rock, Paper, or Scissors?").toUpperCase();
+    playRound(computerSelection, playerSelection)
+    console.log("Computer: "+ computerSelection + " Player: "+ playerSelection + " Winner:" + winner)
  }
  console.log("Computer Score: " + computerScore)
  console.log("Player Score: " + playerScore)
 }
 
 
-getComputerChoice();
 
 //playRound(computerSelection, "rock");
 
