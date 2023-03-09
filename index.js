@@ -5,6 +5,40 @@ let playerScore =0
 let winner
 let winnerMessage =''
 
+const container = document.querySelector('#container');
+
+const results = document.createElement('p');
+container.appendChild(results);
+
+const pscore = document.createElement('p');
+pscore.classList.add('#pscore');
+container.appendChild(pscore);
+
+const cscore = document.createElement('p');
+cscore.classList.add('#cscore');
+container.appendChild(cscore);
+
+const win = document.createElement('p');
+win.style.color = 'RED';
+win.style.fontSize = "24px";
+container.appendChild(win);
+
+function startGame(){
+
+  computerScore = 0;
+  playerScore = 0;
+  winner =''
+  winnerMessage =''
+
+  pscore.textContent = `Player Score: ${playerScore}`;
+
+  cscore.textContent = `Computer Score: ${computerScore}`;
+
+
+}
+
+startGame()
+
 function getComputerChoice() {
     let computerRoll = Math.floor(Math.random() * 3)
     if (computerRoll == 0) {computerSelection = 'ROCK'}
@@ -25,6 +59,7 @@ function playRound(computerSelection, playerSelection){
       ) {
         winner = 'player';
         playerScore++;
+        pscore.textContent = `Player Score: ${playerScore}`;
       }
       if (
         (computerSelection === 'ROCK' && playerSelection === 'SCISSORS') ||
@@ -33,12 +68,13 @@ function playRound(computerSelection, playerSelection){
       ) {
         winner = 'computer';
         computerScore++;
+        cscore.textContent = `Computer Score: ${computerScore}`;
         }
     }
 
     function checkScore(){
-      if (computerScore === 5) {winnerMessage = "Computer Wins";prompt(winnerMessage)}
-      if (playerScore === 5) {winnerMessage = "Player Wins";prompt(winnerMessage)}
+      if (computerScore === 5) {winnerMessage = "Computer Wins"; win.textContent = winnerMessage}
+      if (playerScore === 5) {winnerMessage = "Player Wins"; win.textContent = winnerMessage}
     }
 
     const buttons = document.querySelectorAll('button');
@@ -47,11 +83,11 @@ function playRound(computerSelection, playerSelection){
 
           // and for each one we add a 'click' listener
           button.addEventListener('click', (e) => {
-            console.log(e.target.id);
+            checkScore();
             computerSelection = getComputerChoice();
             playerSelection = e.target.id.toUpperCase();
             playRound(computerSelection, playerSelection);
-            checkScore();
+            results.textContent = `Computer: ${computerSelection} Player: ${playerSelection} Winner: ${winner}`
             console.log("Computer: "+ computerSelection + " Player: "+ playerSelection + " Winner:" + winner)
             console.log("Computer Score: " + computerScore)
             console.log("Player Score: " + playerScore)
