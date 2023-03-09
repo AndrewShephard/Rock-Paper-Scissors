@@ -35,22 +35,36 @@ function playRound(computerSelection, playerSelection){
         }
     }
 
-function game(){
- for(let i = 0; i < 5; i++){
-    computerSelection = getComputerChoice()
-    playerSelection = prompt("Rock, Paper, or Scissors?").toUpperCase();
-    playRound(computerSelection, playerSelection)
-    console.log("Computer: "+ computerSelection + " Player: "+ playerSelection + " Winner:" + winner)
- }
- console.log("Computer Score: " + computerScore)
- console.log("Player Score: " + playerScore)
- if (computerScore > playerScore) {console.log("Computer Wins!")}
- else if (playerScore > computerScore){console.log("Player Wins!")}
- else {console.log("Tie!")}
-}
+    const buttons = document.querySelectorAll('button');
+        // we use the .forEach method to iterate through each button
+        buttons.forEach((button) => {
+
+          // and for each one we add a 'click' listener
+          button.addEventListener('click', (e) => {
+            console.log(e.target.id);
+            computerSelection = getComputerChoice();
+            playerSelection = e.target.id.toUpperCase();
+            playRound(computerSelection, playerSelection);
+            console.log("Computer: "+ computerSelection + " Player: "+ playerSelection + " Winner:" + winner)
+          });
+        });
+
+// function game(){
+//  for(let i = 0; i < 5; i++){
+//     computerSelection = getComputerChoice()
+//     playerSelection = prompt("Rock, Paper, or Scissors?").toUpperCase();
+//     playRound(computerSelection, playerSelection)
+//     console.log("Computer: "+ computerSelection + " Player: "+ playerSelection + " Winner:" + winner)
+//  }
+//  console.log("Computer Score: " + computerScore)
+//  console.log("Player Score: " + playerScore)
+//  if (computerScore > playerScore) {console.log("Computer Wins!")}
+//  else if (playerScore > computerScore){console.log("Player Wins!")}
+//  else {console.log("Tie!")}
+// }
 
 
 
 //playRound(computerSelection, "rock");
 
-game()
+
